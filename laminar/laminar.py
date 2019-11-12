@@ -141,6 +141,7 @@ def iter_flow(function: Callable, data: Collection, *args, **kwargs) -> dict:
     """
         
     cores = kwargs.pop("cores", cpu_count())
+    sort_results = kwargs.pop("sort_results", False)
     
     if cores > cpu_count():
         cores = cpu_count()
@@ -157,11 +158,13 @@ def iter_flow(function: Callable, data: Collection, *args, **kwargs) -> dict:
     
     processes = []    
     
+    ordered_names = []
     end = -1
     for dataset in data_split:
         start = end + 1
         end += len(dataset)
         name = f"data[{start}-{end}]"
+        ordered_names.append(name)
         new_process = Process(target=__converter, args=(name, function, dataset, queue, args, kwargs))
         processes.append(new_process)
     
@@ -175,6 +178,9 @@ def iter_flow(function: Callable, data: Collection, *args, **kwargs) -> dict:
     for p in processes:
         q = queue.get()
         results[q[0]] = q[1]
+    
+    if sort_results:
+        results = {k:results[k] for k in ordered_names}
     
     return results
 

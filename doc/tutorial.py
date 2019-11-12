@@ -46,15 +46,15 @@ my_lam.show_processes()
 
 my_lam.add_process('avg_s_length', lambda x: x.mean(), le.iris['sepal_length'])
 
-my_lam.add_process('avg_s_width', lambda x: x.mean(), le.iris['sepal_width'])
+my_lam.add_process('avg_s_width', lambda x: x.mean(), le.iris['petal_width'])
 
 my_lam.add_process('avg_p_length', lambda x: x.mean(), le.iris['petal_length'])
 
 my_lam.add_process('avg_p_width', lambda x: x.mean(), le.iris['petal_width'])
 
-my_lam.drop_process('avg_s_length')
+my_lam.drop_process('avg_s_width')
 
-my_lam.add_process('avg_s_width', lambda x: x.mean(), le.iris['petal_width'])
+my_lam.add_process('avg_s_width', lambda x: x.mean(), le.iris['sepal_width'])
 
 my_lam.show_processes()
 

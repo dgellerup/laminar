@@ -71,6 +71,12 @@ def test_iter_flow():
 
     assert result.get('data[0-5]') == 3
 
+    result = laminar.iter_flow(lambda x: sum(x), [])
+
+    assert result == {
+                        'data[empty]': None
+                        }
+
 def test_list_flow():
     result = laminar.list_flow(le.single_total, [le.laminar_df[col] for col in le.laminar_df.columns])
 
@@ -145,7 +151,7 @@ def test_my_lam(my_lam):
 
     result = my_lam.get_results()
 
-    assert result == {'cube2': [1, 1, 8, 8], 'cube3': [1, 8, 1, 8]}
+    assert result == {'cube2': [1, 1, 8, 8], 'cube3': [1, 8, 1, 8], 'square1': [0, 1, 4, 9]}
     assert len(my_lam._processes) == 0
 
     my_lam.add_process('square2', square, [0, 1, 2, 3])

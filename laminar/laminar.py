@@ -14,15 +14,11 @@ class Laminar:
         self.results = {}
         
     def add_process(self, name: str, function: Callable, dataset: Collection, *args, **kwargs) -> None:
-        if len(self._processes) < self.cores:
-            new_process = Process(target=self.__converter, args=(name, function, dataset, args, kwargs))
-            self._processes[name] = new_process
-        else:
-            print("Warning: Process pool was full.")
-            print(f"{list(self._processes.keys())[0]} has been removed to make room for {name}.")
-            self._processes.popitem(last=False)
-            new_process = Process(target=self.__converter, args=(name, function, dataset, args, kwargs))
-            self._processes[name] = new_process
+        if name in self._processes.keys():
+            print(f"A process with name '{name}' already existed. It has been replaced with new process '{name}'.")
+        
+        new_process = Process(target=self.__converter, args=(name, function, dataset, args, kwargs))
+        self._processes[name] = new_process
         
     def show_processes(self) -> None:
         proc_string = ""
@@ -141,11 +137,16 @@ def iter_flow(function: Callable, data: Collection, *args, **kwargs) -> dict:
     """
         
     cores = kwargs.pop("cores", cpu_count())
+    sort_results = kwargs.pop("sort_results", False)
     
     if cores > cpu_count():
         cores = cpu_count()
     
-    if len(data) > cores:
+    if len(data) == 0:
+    
+        return {"data[empty]": None}
+        
+    elif len(data) > cores:
         
         data_split = np.array_split(data, cores)
         
@@ -157,11 +158,13 @@ def iter_flow(function: Callable, data: Collection, *args, **kwargs) -> dict:
     
     processes = []    
     
+    ordered_names = []
     end = -1
     for dataset in data_split:
         start = end + 1
         end += len(dataset)
         name = f"data[{start}-{end}]"
+        ordered_names.append(name)
         new_process = Process(target=__converter, args=(name, function, dataset, queue, args, kwargs))
         processes.append(new_process)
     
@@ -175,6 +178,9 @@ def iter_flow(function: Callable, data: Collection, *args, **kwargs) -> dict:
     for p in processes:
         q = queue.get()
         results[q[0]] = q[1]
+    
+    if sort_results:
+        results = {k:results[k] for k in ordered_names}
     
     return results
 

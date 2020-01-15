@@ -45,6 +45,6 @@ def test_iterflow_complex_example():
     def wrapfoo(l,rl):
         return("".join([foo(x,rl) for x in l]))
 
-    result = laminar.iter_flow(wrapfoo, iterable_list, rl = reference_list, cores = 2 )
+    result = laminar.iter_flow(wrapfoo, iterable_list, rl = reference_list, cores=2, sort_results=True)
     print(result)
     assert list(result.values()) == ['hello', 'world']

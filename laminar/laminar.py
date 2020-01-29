@@ -1,9 +1,11 @@
 from collections import OrderedDict
+import logging
 from multiprocessing import Queue, Process, cpu_count
 from typing import Collection, Callable
 
 import numpy as np
 
+logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.INFO)
 
 class Laminar:
 
@@ -15,7 +17,7 @@ class Laminar:
 
     def add_process(self, name: str, function: Callable, dataset: Collection, *args, **kwargs) -> None:
         if name in self._processes.keys():
-            print(f"A process with name '{name}' already existed. It has been replaced with new process '{name}'.")
+            logging.info(f" A process with name '{name}' already existed. It has been replaced with new process '{name}'.")
 
         new_process = Process(target=self.__converter, args=(name, function, dataset, args, kwargs))
         self._processes[name] = new_process
@@ -24,7 +26,7 @@ class Laminar:
         proc_string = ""
         for key in self._processes.keys():
             proc_string = f"{proc_string + key}\n"
-        print(proc_string)
+        logging.info(proc_string)
 
     def drop_process(self, name: str) -> None:
         del self._processes[name]
@@ -73,7 +75,7 @@ class Laminar:
         try:
             result = function(data_shard, *args, **kwargs)
         except Exception as e:
-            print(f"Exception occurred for process {name}.")
+            logging.warning(f"Exception occurred for process {name}.")
             result = e
 
         self._queue.put((name, result))
@@ -99,7 +101,7 @@ def __converter(name: str, function: Callable, data_shard: Collection, queue: Qu
     try:
         result = function(data_shard, *args, **kwargs)
     except Exception as e:
-        print(f"Exception occurred for process {name}.")
+        logging.warning(f"Exception occurred for process {name}.")
         result = e
 
     queue.put((name, result))

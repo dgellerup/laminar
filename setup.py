@@ -17,7 +17,7 @@ opts = dict(name='laminar',
             install_requires=["pandas>=0.24.0",
                                 "numpy>=1.12.1"],
             classifiers=[
-                'Development Status :: 5 - Production',
+                'Development Status :: 5 - Production/Stable',
                 'Intended Audience :: Developers',
                 'Topic :: Software Development :: Build Tools',
                 'License :: OSI Approved :: MIT License',

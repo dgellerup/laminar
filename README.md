@@ -2,6 +2,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/dgellerup/laminar/badge.svg?branch=master)](https://coveralls.io/github/dgellerup/laminar?branch=master)
 ![PyPI](https://img.shields.io/pypi/v/laminar)
 ![PyPI - Python Version](https://img.shields.io/badge/python-3.6%20|%203.7%20|%203.8-blue)
+![PyPI - Downloads](https://img.shields.io/pypi/dm/laminar)
 
 *Special thanks to Jim Fan for relinquishing the name "laminar" to me on pypi.org. Much appreciated, Jim!*
 

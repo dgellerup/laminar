@@ -1,6 +1,9 @@
 [![CircleCI](https://img.shields.io/circleci/build/github/dgellerup/laminar?logo=circleci&token=8ecea183c3e45f955afdad617348f592d4fc4346)](https://circleci.com/gh/dgellerup/laminar/tree/master)
 [![Coverage Status](https://coveralls.io/repos/github/dgellerup/laminar/badge.svg?branch=master)](https://coveralls.io/github/dgellerup/laminar?branch=master)
+![PyPI](https://img.shields.io/pypi/v/laminar)
 ![PyPI - Python Version](https://img.shields.io/badge/python-3.6%20|%203.7%20|%203.8-blue)
+
+*Special thanks to Jim Fan for relinquishing the name "laminar" to me on pypi.org. Much appreciated, Jim!*
 
 # laminar  
 __Laminar seeks to take most of the effort out of parallel processing in Python by providing user-friendly parallelization functionality.__  
@@ -20,7 +23,7 @@ results = my_lam.get_results()
 ### Installation
 Laminar is delivered as a package. To install, activate your preferred environment, then use:  
 
-`pip install git+https://github.com/dgellerup/laminar`.  
+`pip install laminar`.  
 
 Laminar's `laminar` module only requires one third-party library, which is `numpy`. laminar_examples, a module with some practice functions and data objects, also requires `pandas`. Both libraries will be automatically included in the laminar installation.
 

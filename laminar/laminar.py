@@ -27,10 +27,13 @@ class Laminar:
         proc_string = ""
         for key in self._processes.keys():
             proc_string = f"{proc_string + key}\n"
-        logging.info(proc_string)
+        print(proc_string.strip())
 
     def drop_process(self, name: str) -> None:
-        del self._processes[name]
+        if name in self._processes:
+            del self._processes[name]
+        else:
+            logging.info(f" Process '{name}' not found.")
 
     def launch_processes(self) -> str:
         for p in self._processes.values():

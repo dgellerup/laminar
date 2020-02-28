@@ -1,6 +1,7 @@
 from collections import OrderedDict
 import logging
 from multiprocessing import Queue, Process, cpu_count
+import traceback
 from typing import Collection, Callable
 
 import numpy as np
@@ -26,10 +27,13 @@ class Laminar:
         proc_string = ""
         for key in self._processes.keys():
             proc_string = f"{proc_string + key}\n"
-        logging.info(proc_string)
+        print(proc_string.strip())
 
     def drop_process(self, name: str) -> None:
-        del self._processes[name]
+        if name in self._processes:
+            del self._processes[name]
+        else:
+            logging.info(f" Process '{name}' not found.")
 
     def launch_processes(self) -> str:
         for p in self._processes.values():
@@ -75,8 +79,10 @@ class Laminar:
         try:
             result = function(data_shard, *args, **kwargs)
         except Exception as e:
-            logging.warning(f"Exception occurred for process {name}.")
-            result = e
+            logging.warning(f" Exception occurred for process '{name}.'")
+            logging.exception(e)
+            
+            result = traceback.format_exc()
 
         self._queue.put((name, result))
 
@@ -101,8 +107,10 @@ def __converter(name: str, function: Callable, data_shard: Collection, queue: Qu
     try:
         result = function(data_shard, *args, **kwargs)
     except Exception as e:
-        logging.warning(f"Exception occurred for process {name}.")
-        result = e
+        logging.warning(f" Exception occurred for process {name}.")
+        logging.exception(e)
+            
+        result = traceback.format_exc()
 
     queue.put((name, result))
 

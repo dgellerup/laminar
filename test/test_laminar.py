@@ -25,7 +25,7 @@ def test_converter():
     q = queue.get()
 
     assert q[0] == "testfail"
-    assert str(q[1]) == "'int' object has no attribute 'append'"
+    assert str(q[1]).startswith('Traceback')
 
 
 def test_iter_flow():
@@ -175,4 +175,4 @@ def test_my_lam(my_lam):
     my_lam.launch_processes()
 
     result = my_lam.get_results()
-    assert str(result.get('fail')) == "'int' object has no attribute 'append'"
+    assert str(result.get('fail')).startswith('Traceback')

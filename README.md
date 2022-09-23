@@ -4,7 +4,7 @@
 ![PyPI - Python Version](https://img.shields.io/badge/python-3.6%20|%203.7%20|%203.8-blue)
 ![PyPI - Downloads](https://img.shields.io/pypi/dm/laminar)
 
-*Special thanks to Jim Fan for relinquishing the name "laminar" to me on pypi.org. Much appreciated, Jim!*
+*This project is now temporarily laminar-py on pypi.org.*
 
 # laminar  
 __Laminar seeks to take most of the hassle out of parallel processing in Python by providing user-friendly parallelization functionality.__  

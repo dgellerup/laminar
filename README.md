@@ -22,16 +22,16 @@ results = my_lam.get_results()
 
 ## Usage
 ### Installation
-Laminar is delivered as a package. To install, activate your preferred environment, then use:  
+Laminar-py is delivered as a package. To install, activate your preferred environment, then use:  
 
-`pip install laminar`  
+`pip install laminar-py`  
 
-Laminar's `laminar` module only requires one third-party library, which is `numpy`. laminar_examples, a module with some practice functions and data objects, also requires `pandas`. Both libraries will be automatically included in the laminar installation.
+Laminar's `laminar-py` module only requires one third-party library, which is `numpy`. laminar_examples, a module with some practice functions and data objects, also requires `pandas`. Both libraries will be automatically included in the laminar installation.
 
 ### Importing
-You can use laminar by placing `from laminar import laminar` or `import laminar.laminar as <some_alias>` at the top of your python file. In order to practice/test laminar with built-in functions and data, place `from laminar import laminar_examples` or `import laminar.laminar_examples as <some_alias>` at the top of your python file.  
+You can use laminar by placing `from laminar-py import laminar` or `import laminar-py.laminar as <some_alias>` at the top of your python file. In order to practice/test laminar with built-in functions and data, place `from laminar import laminar_examples` or `import laminar.laminar_examples as <some_alias>` at the top of your python file.  
 
-If only using the class `Laminar` you can import it directly with `from laminar.laminar import Laminar`.
+If only using the class `Laminar` you can import it directly with `from laminar-py.laminar import Laminar`.
 
 ### Using laminar
 laminar currently consists of a class `Laminar` as well as two module functions that are designed to work with different data configurations, `laminar.iter_flow` and `laminar.list_flow`.
